@@ -1,6 +1,6 @@
 package br.senac.tads.dsw.dados_pessoais;
 
-import  java.time.LocalDate;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.validation.constraints.Email;
@@ -11,10 +11,13 @@ import jakarta.validation.constraints.Size;
 
 public class PessoaAlteracaoDto {
 
-
-	@NotBlank(message = "O nome completo é obligatorio")
+	@NotBlank(message = "O nome completo é obrigatório")
 	@Size(max = 100)
 	private String nome;
+
+	@NotBlank(message = "O e-mail é obrigatório")
+	@Email(message = "E-mail inválido")
+	private String email; // Adicionado aqui, pois faltava no DTO
 
 	@NotBlank
 	@Size(max = 20)
@@ -26,5 +29,45 @@ public class PessoaAlteracaoDto {
 
 	private List<String> conhecimentos;
 
+	// --- GETTERS E SETTERS ---
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public List<String> getConhecimentos() {
+		return conhecimentos;
+	}
+
+	public void setConhecimentos(List<String> conhecimentos) {
+		this.conhecimentos = conhecimentos;
+	}
 }
