@@ -30,7 +30,15 @@ public class PessoaController {
         return pessoaService.obterPessoas();
     }
 
-    @GetMapping("/{username}")
+
+	// GET /pessoas/busca?q=<termo>
+	@GetMapping("/busca")
+	public ResponseEntity<List<PessoaDto>> buscarPessoas(@RequestParam("q") String termo) {
+		return ResponseEntity.ok(pessoaService.buscarPessoas(termo));
+	}
+
+
+	@GetMapping("/{username}")
     public PessoaDto obterPessoa(@PathVariable("username") String username) { // <- Corrigido aqui
         Optional<PessoaDto> optPessoa = pessoaService.obterPessoa(username);
 

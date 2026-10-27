@@ -1,18 +1,22 @@
 package br.senac.tads.dsw.dados_pessoais.repositorio;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import br.senac.tads.dsw.dados_pessoais.entidade.PessoaEntity;
-@Repository
-public interface PessoaRepository extends JpaRepository<PessoaEntity,Integer>{
 
-	Optional<PessoaEntity>findByUsername(String username);
+public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
 
-	 boolean existsByUsername(String username);
+	Optional<PessoaEntity> findByUsername(String username);
 
-
-
-
-
+	@Query("""
+        SELECT p FROM PessoaEntity p
+        WHERE LOWER(p.username) LIKE LOWER(CONCAT('%', :termo, '%'))
+           OR LOWER(p.nome)     LIKE LOWER(CONCAT('%', :termo, '%'))
+           OR LOWER(p.email)    LIKE LOWER(CONCAT('%', :termo, '%'))
+    """)
+	List<PessoaEntity> buscarPorTermo(@Param("termo") String termo);
 }

@@ -15,7 +15,22 @@ public class ConhecimentoEntity {
 	private Integer id;
 	@Column(nullable = false,unique = true,length = 1000)
 	private String nome;
+	// Getters e Setters manuais
+	public Integer getId() {
+		return id;
+	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 
 }
